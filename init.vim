@@ -6,7 +6,14 @@
 " Look and Feel
 " -------------------
 
-let g:SESSION_DIR   = $HOME.'/.cache/vim/sessions'
+if has('nvim')
+  let g:VIM_CONFIG_HOME = $HOME.'/.config/nvim'
+else
+  let g:VIM_CONFIG_HOME = $HOME.'/.vim'
+endif
+let g:VIM_PLUGIN_HOME   = g:VIM_CONFIG_HOME . '/bundle'
+
+let g:SESSION_DIR       = $HOME.'/.cache/vim/sessions'
 
 
 " Environment {
@@ -38,7 +45,7 @@ let g:SESSION_DIR   = $HOME.'/.cache/vim/sessions'
         " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
         " across (heterogeneous) systems easier.
         if WINDOWS()
-          set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+          execute 'set runtimepath=' . g:VIM_CONFIG_HOME . ',' . $VIM . '/vimfiles,' . $VIMRUNTIME . ','. $VIM . '/vimfiles/after,' . g:VIM_CONFIG_HOME . '/after'
         endif
     " }
 
@@ -60,21 +67,21 @@ function! SourceDirectory(file)
 endfunction
 
 " Use before config if available {
-    call SourceIfExists("~/.vimrc.before")
+    call SourceIfExists(g:VIM_CONFIG_HOME .'/before.vim')
 " }
 
 " Don't reset twice on reloading - 'compatible' has SO many side effects.
 if !exists('s:loaded_my_vimrc')
-  call SourceDirectory('~/.vim/quirks')
+  call SourceDirectory(g:VIM_CONFIG_HOME  .'/quirks')
 
-  call SourceIfExists("~/.vim/ignore.vim")
-  call SourceIfExists("~/.vim/rice.vim")
+  call SourceIfExists(g:VIM_CONFIG_HOME   .'/ignore.vim')
+  call SourceIfExists(g:VIM_CONFIG_HOME   .'/rice.vim')
 
-  call SourceDirectory('~/.vim/settings')
+  call SourceDirectory(g:VIM_CONFIG_HOME  .'/settings')
 
 
-  call SourceIfExists("~/.vim/bundle_loader.vim")
-  call SourceDirectory('~/.vim/bundles.settings')
+  call SourceIfExists(g:VIM_CONFIG_HOME   .'/bundle_loader.vim')
+  call SourceDirectory(g:VIM_CONFIG_HOME  .'/bundles.settings')
 endif
 
 
@@ -82,26 +89,26 @@ endif
 " Local Settings
 "===============================================================================
 
-call SourceIfExists("~/.vim/colors.vim")
+call SourceIfExists(g:VIM_CONFIG_HOME     .'/colors.vim')
 
 " Use fork vimrc if available {
-    call SourceIfExists("~/.vimrc.fork")
+    call SourceIfExists(g:VIM_CONFIG_HOME .'/fork.vim')
 " }
 
 " Use local vimrc if available {
-    call SourceIfExists("~/.vimrc.local")
+    call SourceIfExists(g:VIM_CONFIG_HOME .'/local.vim')
 " }
 
 " FreeBSD-specific terminal fixes
 if FREEBSD()
-  call SourceIfExists("~/.vim/compat/freebsd.vim")
-  call SourceIfExists("/usr/src/tools/tools/editing/freebsd.vim")
+  call SourceIfExists(g:VIM_CONFIG_HOME   .'/compat/freebsd.vim')
+  call SourceIfExists('/usr/src/tools/tools/editing/freebsd.vim')
 end
 
 " Use local gvimrc if available and gui is running {
-    if has('gui_running')
-      call SourceIfExists("~/.gvimrc.local")
-    endif
+  if has('gui_running')
+    call SourceIfExists(g:VIM_CONFIG_HOME .'/local.gvim')
+  endif
 " }
 
 if !exists('s:loaded_my_vimrc')

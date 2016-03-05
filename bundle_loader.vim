@@ -1,7 +1,6 @@
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall | source ~/.vimrc
+if empty(glob(g:VIM_CONFIG_HOME.'/autoload/plug.vim'))
+  silent execute '!curl -fLo "'.g:VIM_CONFIG_HOME.'/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
 " Automatically install missing plugins on startup
@@ -10,10 +9,10 @@ autocmd VimEnter *
   \|   PlugInstall | q
   \| endif
 
-call plug#begin('~/.vim/bundle')
+call plug#begin(g:VIM_PLUGIN_HOME)
 
 if !exists('g:bundles')
-  for fpath in split(globpath('~/.vim/bundles.d/', '*.vim'), '\n')
+  for fpath in split(globpath(g:VIM_CONFIG_HOME.'/bundles.d/', '*.vim'), '\n')
     exe 'source' fpath
   endfor
 else
