@@ -12,6 +12,7 @@ else
   let g:VIM_CONFIG_HOME = $HOME.'/.vim'
 endif
 let g:VIM_PLUGIN_HOME   = g:VIM_CONFIG_HOME . '/bundle'
+let g:VIM_FRAMEWORK_HOME= g:VIM_CONFIG_HOME . '/framework'
 
 let g:SESSION_DIR       = $HOME.'/.cache/vim/sessions'
 
@@ -80,7 +81,7 @@ if !exists('s:loaded_my_vimrc')
   call SourceDirectory(g:VIM_CONFIG_HOME  .'/settings')
 
 
-  call SourceIfExists(g:VIM_CONFIG_HOME   .'/bundle_loader.vim')
+  call SourceIfExists(g:VIM_FRAMEWORK_HOME   .'/bundle_loader.vim')
   call SourceDirectory(g:VIM_CONFIG_HOME  .'/bundles.settings')
 endif
 
