@@ -17,7 +17,7 @@ function StartDeoplete()
     let g:deoplete#omni#input_patterns.sass   = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
     let g:deoplete#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)\w*'
     let g:deoplete#omni#input_patterns.cpp = ['[^. *\t]\.\w*', '[^. *\t]\::\w*', '[^. *\t]\->\w*', '[<"].*/']
- 
+    let g:deoplete#omni#input_patterns.java = '[^. *\t]\.\w*'
     let g:deoplete#omni#input_patterns.javascript = '[^. \t]\.\%(\h\w*\)\?'
     let g:deoplete#omni#input_patterns.go = '[^.[:digit:] *\t]\.\w*'
     let g:deoplete#omni#input_patterns.ruby = ['[^. *\t]\.\w*', '\h\w*::']
