@@ -44,6 +44,7 @@ dirs=( bundles.d bundles.settings settings )
 mkdir ${dirs[@]}
 git init
 echo bundle >> .gitignore
+echo autoload >> .gitignore
 git submodule add https://github.com/jtsymon/vim-config-framework.git framework
 ln -rs framework/ftdetect .
 ln -rs framework/init.vim $VIMRC
