@@ -1,9 +1,3 @@
-"Map leader and localleader key to comma
-let mapleader = ","
-let g:mapleader = ","
-let maplocalleader = ","
-let g:maplocalleader = ","
-
 " <Leader>2: Toggle Tagbar
 nnoremap <silent> <Leader>2 :TagbarToggle<cr>
 
